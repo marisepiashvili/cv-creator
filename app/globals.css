@@ -1,0 +1,312 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens (from the "CV ბილდერი — საიტის ვიზუალი" canvas) ---------- */
+@theme {
+  --color-ink: #06201f;
+  --color-teal: #0b7f72;
+  --color-teal-deep: #0b5f55;
+  --color-clay: #c2410c;
+  --color-mint: #5eead4;
+  --color-sun: #fde68a;
+  --color-peach: #fdba74;
+  --color-leaf: #6ee7b7;
+  --color-cv-ink: #10302d;
+  --color-cv-muted: #3f6560;
+  --color-cv-line: #cbe5df;
+  --color-cv-tint: #e3f4f0;
+  --font-sans: var(--font-georgian), var(--font-latin), system-ui, sans-serif;
+  --font-display: var(--font-latin), var(--font-georgian), sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: #fff;
+  font-family: var(--font-sans);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  summary {
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-mint);
+    outline-offset: 3px;
+    border-radius: 10px;
+  }
+}
+
+@layer components {
+  /* Glass surfaces */
+  .glass {
+    background: rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    backdrop-filter: blur(22px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow:
+      0 12px 40px -12px rgba(2, 16, 15, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+  .glass-soft {
+    background: rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(22px);
+    backdrop-filter: blur(22px);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+  .glass-warm {
+    background: linear-gradient(135deg, rgba(11, 127, 114, 0.6), rgba(194, 65, 12, 0.5));
+    -webkit-backdrop-filter: blur(22px);
+    backdrop-filter: blur(22px);
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    box-shadow:
+      0 18px 44px -14px rgba(194, 65, 12, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  }
+  .well {
+    background: rgba(3, 24, 22, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 0 20px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease, background 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--color-teal), var(--color-clay));
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow:
+      0 10px 26px -10px rgba(194, 65, 12, 0.7),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+  .btn-primary:hover:not(:disabled) {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+  }
+  .btn-glass {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .btn-glass:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.22);
+  }
+  .btn-white {
+    background: #fff;
+    color: var(--color-teal-deep);
+    font-weight: 700;
+    box-shadow: 0 12px 26px -10px rgba(2, 16, 15, 0.6);
+  }
+  .btn-white:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+  .btn-ai {
+    background: rgba(94, 234, 212, 0.18);
+    border: 1px solid rgba(94, 234, 212, 0.6);
+    box-shadow: 0 0 18px -4px rgba(94, 234, 212, 0.5);
+    font-size: 14px;
+  }
+  .btn-ai:hover:not(:disabled) {
+    background: rgba(94, 234, 212, 0.28);
+  }
+  .btn-dashed {
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+  }
+  .btn-dashed:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .btn-dashed:disabled {
+    border-color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  /* Chips & badges */
+  .badge-soon {
+    padding: 2px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex: none;
+  }
+
+  /* Segmented toggles */
+  .seg {
+    display: flex;
+    padding: 3px;
+    border-radius: 12px;
+    background: rgba(3, 24, 22, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .seg > button {
+    min-height: 38px;
+    min-width: 48px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .seg > button[aria-pressed="true"],
+  .seg > button[aria-selected="true"] {
+    background: rgba(255, 255, 255, 0.22);
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  /* Form fields */
+  .field-label {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .field-hint {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .input {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    background: rgba(3, 24, 22, 0.4);
+    color: #fff;
+    font: inherit;
+    font-size: 16px;
+  }
+  textarea.input {
+    padding: 12px 14px;
+    line-height: 1.7;
+    resize: vertical;
+  }
+  .input::placeholder {
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .input:focus {
+    outline: none;
+    border-color: var(--color-leaf);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+  }
+  .input:disabled {
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+/* Background light blobs */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ---------- CV document (shared by live preview and PDF) ---------- */
+.cv-page {
+  width: 794px; /* A4 @ 96dpi */
+  min-height: 1123px;
+  box-sizing: border-box;
+  background: #fff;
+  color: var(--color-cv-ink);
+  font-family: var(--font-georgian), var(--font-latin), sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 0;
+  }
+  :root {
+    color-scheme: light;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  .screen-only {
+    display: none !important;
+  }
+  #print-root {
+    display: block !important;
+  }
+  .cv-page {
+    min-height: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .cv-avoid-break {
+    break-inside: avoid;
+  }
+}
+
+#print-root {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .btn {
+    transition: none;
+  }
+}
